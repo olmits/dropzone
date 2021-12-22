@@ -49,8 +49,6 @@ const Dropzone = ({
         setDragging(false);
         if (e.dataTransfer.files && e.dataTransfer.files.length === 1) {
             const file = e.dataTransfer.files[0];
-            console.log("asdf", file);
-            
             onLoadFile(file);
         }
     }
@@ -67,7 +65,8 @@ const Dropzone = ({
                 <img className="dropzoneLogo" src={value || DropzoneLogo} alt="logo" />
             </div>
             <p className="dropzoneAreaInstruction">
-                {loading ? "Uploading" : (value ? "Drag & drop here to replace" : "Drag & drop here")}
+                {loading && "Uploading"}
+                {!loading && (value ? "Drag & drop here to replace" : "Drag & drop here")}
             </p>
             <p className="dropzoneAreaInstructionSeparator">- or -</p>
             <div>
