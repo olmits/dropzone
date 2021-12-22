@@ -1,0 +1,64 @@
+@use "../../styles/global" as global
+
+.dropzone
+    background: #fff
+    border: 1px solid global.$border-color
+.dropzoneHeader
+    padding: 21px 20px 18px
+    border-bottom: 1px solid global.$border-color
+.dropzoneHeaderTitle
+    color: global.$text1-color
+    font-weight: 700
+    font-size: 20px
+    line-height: 20px
+.dropzoneHeaderDescription
+    color: global.$text3-color
+    font-weight: 400
+    font-size: 12px
+    line-height: 12px
+.dropzoneArea
+    background: #fff
+    width: 360px
+    height: 470px
+    margin: 19px 20px 21px
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+.dropzoneAreaDragging
+    background: global.$div-active-background
+    border: 1px dotted global.$link-color
+    & > *
+        pointer-events: none
+.dropzoneLogo
+    max-width: 80px
+    max-height: 80px
+.dropzoneLoader
+    width: 80px
+    height: 80px
+    display: flex
+    justify-content: center
+    align-items: center
+    border-radius: 50%
+    border: 1px solid #D1E3F8
+    box-sizing: border-box
+.dropzoneAreaInstruction
+    font-weight: 400
+    font-size: 12px
+    line-height: 12px
+    color: global.$text2-color
+.dropzoneAreaInstructionSeparator
+    font-weight: 400
+    font-size: 12px
+    line-height: 12px
+    color: global.$text1-color
+.dropzoneAreaLabel
+    font-weight: 400
+    font-size: 12px
+    line-height: 12px
+    color: global.$link-color
+    cursor: pointer
+    &:hover
+        text-decoration: underline
+.dropzoneAreaInput
+    display: none
