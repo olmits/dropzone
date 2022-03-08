@@ -1,21 +1,12 @@
-import React, { useState } from "react";
+import { DropzoneProvider } from "../../contexts/Dropzone";
 
 import DropzoneComponent from "../../components/Dropzone";
 
 const Dropzone = () => {
-    const [value, setValue] = useState<string>("");
-
-    const onChange = (url: string) => {
-        if (url) {
-            setValue(url);
-        }
-    }
-
     return (
-        <DropzoneComponent
-            value={value}
-            onChange={onChange}
-        />
+        <DropzoneProvider>
+            <DropzoneComponent />
+        </DropzoneProvider>
     );
 }
 

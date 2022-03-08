@@ -1,15 +1,11 @@
-import DropzoneHeader from "./DropzoneHeader";
-import DropzoneArea from "./DropzoneArea";
-import { Props } from "./Dropzone.types";
+import DropzoneHeader from "../DropzoneHeader/DropzoneHeader";
+import DropzoneArea from "../DropzoneArea/DropzoneArea";
 import "./Dropzone.sass"
 
-const Dropzone = ({
-    value,
-    onChange,
-}: Props) => (
+const Dropzone = () => (
     <div className="dropzone">
         <DropzoneHeader />
-        <DropzoneArea value={value} onChange={onChange} />
+        <DropzoneArea />
     </div>
 );
 

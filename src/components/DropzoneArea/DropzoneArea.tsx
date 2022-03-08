@@ -1,12 +1,11 @@
 import React, { useState } from "react";
+import { useDropzone } from "../../contexts/Dropzone";
 import DropzoneLogo from "../../icons/DropzoneLogo.png";
-import { Props } from "./Dropzone.types";
-import "./Dropzone.sass"
+import "./DropzoneArea.sass"
 
-const Dropzone = ({
-    value,
-    onChange,
-}: Props) => {
+const Dropzone = () => {
+    // @ts-ignore
+    const [url, setUrl] = useDropzone();
     const [dragging, setDragging] = useState(false);
     const [loading, setLoading] = useState(false);
 
@@ -25,7 +24,7 @@ const Dropzone = ({
         reader.onload = () => {
             const { result } = reader;
             if (result && typeof result === "string" ) {
-                onChange(result)
+                setUrl(result)
             }
         }
     }
@@ -55,22 +54,22 @@ const Dropzone = ({
 
     return (
         <div
-            className={`dropzoneArea ${dragging ? "dropzoneAreaDragging" : ""}`}
+            className={`dropzone-area ${dragging ? "dropzone-area_dragging" : ""}`}
             onDragEnter={onDragEnter}
             onDragLeave={onDragLeave}
             onDragOver={onDragOver}
             onDrop={onDrop}
         >
-            <div className={`dropzoneLoader ${loading ? "dropzoneLoaderLoading" : ""}`}>
-                <img className="dropzoneLogo" src={value || DropzoneLogo} alt="logo" />
+            <div className={`.dropzone-area__loader ${loading ? ".dropzone-area__loader" : ""}`}>
+                <img className="dropzone-area__logo" src={url || DropzoneLogo} alt="logo" />
             </div>
-            <p className="dropzoneAreaInstruction">
+            <p className="dropzone-area__instruction">
                 {loading && "Uploading"}
-                {!loading && (value ? "Drag & drop here to replace" : "Drag & drop here")}
+                {!loading && (url ? "Drag & drop here to replace" : "Drag & drop here")}
             </p>
-            <p className="dropzoneAreaInstructionSeparator">- or -</p>
-            <div>
-                <label className="dropzoneAreaLabel" htmlFor="dropzoneAreaInput">Select file to upload</label>
+            <p className="dropzone-area__separator">- or -</p>
+            <>
+                <label className="dropzone-area__label" htmlFor="dropzone-area__input">Select file to upload</label>
                 <input
                     onChange={(e) => {
                         const { target: { files } } = e;
@@ -78,12 +77,12 @@ const Dropzone = ({
                             onLoadFile(files[0])
                         }
                     }}
-                    id="dropzoneAreaInput"
+                    id="dropzone-area__input"
                     type="file"
-                    className="dropzoneAreaInput"
+                    className="dropzone-area__input"
                     accept=".png, .jpeg"
                 />
-            </div>
+            </>
         </div>
     );
 }

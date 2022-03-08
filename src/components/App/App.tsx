@@ -1,9 +1,8 @@
-import React from "react";
 import Dropzone from "../../containers/Dropzone";
 import "./App.sass";
 
 const App = () => (
-    <div className="appComponent">
+    <div className="app">
         <Dropzone />
     </div>
 );

@@ -1,0 +1,50 @@
+@use "../../styles/global" as global
+
+.dropzone
+    .dropzone-area
+        background: #fff
+        width: 360px
+        height: 470px
+        margin: 19px 20px 21px
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+        .dropzone-area__logo
+            max-width: 80px
+            max-height: 80px
+        .dropzone-area__loader
+            width: 80px
+            height: 80px
+            display: flex
+            justify-content: center
+            align-items: center
+            border-radius: 50%
+            border: 1px solid #D1E3F8
+            box-sizing: border-box
+        // .dropzone-area__loader_active
+        .dropzone-area__instruction
+            font-weight: 400
+            font-size: 12px
+            line-height: 12px
+            color: global.$text2-color
+        .dropzone-area__separator
+            font-weight: 400
+            font-size: 12px
+            line-height: 12px
+            color: global.$text1-color
+        .dropzone-area__label
+            font-weight: 400
+            font-size: 12px
+            line-height: 12px
+            color: global.$link-color
+            cursor: pointer
+            &:hover
+                text-decoration: underline
+        .dropzone-area__input
+            display: none
+    .dropzone-area_dragging
+        background: global.$div-active-background
+        border: 1px dotted global.$link-color
+        & > *
+            pointer-events: none
