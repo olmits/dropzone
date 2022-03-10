@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useDropzone } from "../../contexts/Dropzone";
+import useEventListener from "../../hooks/useEventListener";
 import DropzoneLogo from "../../icons/DropzoneLogo.png";
 import "./DropzoneArea.sass"
 
@@ -8,6 +9,8 @@ const Dropzone = () => {
     const [url, setUrl] = useDropzone();
     const [dragging, setDragging] = useState(false);
     const [loading, setLoading] = useState(false);
+
+    const dropzoneArea = useRef<HTMLDivElement>(null);
 
     const onLoadFile = (file: File) => {
         const reader = new FileReader();
@@ -24,41 +27,37 @@ const Dropzone = () => {
         reader.onload = () => {
             const { result } = reader;
             if (result && typeof result === "string" ) {
-                setUrl(result)
+                setUrl(result);
             }
         }
     }
 
-    const onDragEnter = (e: React.DragEvent<HTMLDivElement>) => {
+    useEventListener("dragenter", (e: Event) => {
         e.preventDefault();
         setDragging(true);
-    }
-
-    const onDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+    }, dropzoneArea);
+    useEventListener("dragleave", (e: Event) => {
         e.preventDefault();
         setDragging(false);
-    }
-
-    const onDragOver = (e: React.DragEvent<HTMLDivElement>): void => {
+    }, dropzoneArea);
+    useEventListener("dragover", (e: Event) => {
         e.preventDefault();
-    }
-
-    const onDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    }, dropzoneArea);
+    useEventListener("drop", (e: Event) => {
         e.preventDefault();
         setDragging(false);
+        // @ts-ignore
         if (e.dataTransfer.files && e.dataTransfer.files.length === 1) {
+            // @ts-ignore
             const file = e.dataTransfer.files[0];
             onLoadFile(file);
         }
-    }
+    }, dropzoneArea);
 
     return (
         <div
+            ref={dropzoneArea}
             className={`dropzone-area ${dragging ? "dropzone-area_dragging" : ""}`}
-            onDragEnter={onDragEnter}
-            onDragLeave={onDragLeave}
-            onDragOver={onDragOver}
-            onDrop={onDrop}
         >
             <div className={`.dropzone-area__loader ${loading ? ".dropzone-area__loader" : ""}`}>
                 <img className="dropzone-area__logo" src={url || DropzoneLogo} alt="logo" />
