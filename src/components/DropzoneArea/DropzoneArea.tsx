@@ -5,7 +5,6 @@ import DropzoneLogo from "../../icons/DropzoneLogo.png";
 import "./DropzoneArea.sass"
 
 const Dropzone = () => {
-    // @ts-ignore
     const [url, setUrl] = useDropzone();
     const [dragging, setDragging] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -27,6 +26,7 @@ const Dropzone = () => {
         reader.onload = () => {
             const { result } = reader;
             if (result && typeof result === "string" ) {
+                // @ts-ignore
                 setUrl(result);
             }
         }

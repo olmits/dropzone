@@ -1,6 +1,6 @@
 import { createContext, useContext, useMemo, useState } from "react";
 
-const DropzoneContext = createContext({});
+const DropzoneContext = createContext([]);
 
 export function useDropzone() {
     const dropzone = useContext(DropzoneContext);
