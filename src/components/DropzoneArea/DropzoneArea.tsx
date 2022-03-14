@@ -26,7 +26,6 @@ const Dropzone = () => {
         reader.onload = () => {
             const { result } = reader;
             if (result && typeof result === "string" ) {
-                // @ts-ignore
                 setUrl(result);
             }
         }
